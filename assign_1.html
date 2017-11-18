@@ -3,16 +3,19 @@
 <head>
 	<title>1st assignment</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	
 </head>
 
 <body>
-	<form>
+	<form onsubmit="return false">
+		
+
 		<!--#######   Numbers fields   #######-->
-		<p>1st number: <input type="number" id="firstNumber"></p>
-		<p>2nd number: <input type="number" id="secondNumber"></p>
+		<p>1st number :  <input type="number" id="firstNumber" value="4"></p>
+		<p>2nd number: <input type="number" id="secondNumber" value="2"></p>
 
 		<!--#######   Operations drop down list #######-->
-		Operation: <select id="dropdown1">
+		Operation : <select id="dropdown1">
 			<option value="Addition">Add (+)</option>
 			<option value="Subtraction">Subtract (-)</option>
 			<option value="Multiplication">Multiply (*)</option>
@@ -21,10 +24,16 @@
 		</select><br><br>
 
 		<!--#######   Calculate button   #######-->
-		<input type="submit" id="calculate" value="Result :" onclick="calculate()">
+
+		<input type="submit" id="calculate" value="Result :" onclick="operation()">
 		<p id="result">0</p>
 	</form>
 
-	<script src="calculate.js"></script>
+	<script type="text/javascript" src="calculate.js"></script>
+	<!-- 
+	<script type="text/javascript">
+		window.alert(document.getElementById("firstNumber").value);
+	</script>
+	 -->
 </body>
 </html>
