@@ -25,6 +25,5 @@ function operation(){
 			break;
 	}
 
-	
 	document.getElementById("result").innerHTML = result;
 }
