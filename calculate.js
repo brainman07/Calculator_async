@@ -1,27 +1,42 @@
-function operation(){
+function get_numbers(){
+	var	firstNumber = document.getElementById("firstNumber").value;
+	var	secondNumber = document.getElementById("secondNumber").value;
+	var values = {
+		nr1:(+firstNumber), 
+		nr2:(+secondNumber)
+	};
+	return values;
+}
+
+function get_operation(){
 	var dropdown = document.getElementById("dropdown1");
+	return dropdown.options[dropdown.selectedIndex].value;
+}
 
-	var	nr1 = document.getElementById("firstNumber").value;
-
-	var	nr2 = document.getElementById("secondNumber").value;
+function execute_operation(){
+	
+	var values = get_numbers();
 	var result = 0;
 
-	switch (dropdown.selectedIndex){
-		case 0:
-			result = (+nr1) + (+nr2);
+	switch (get_operation()){
+		case "Addition":
+			result = (values.nr1) + (values.nr2);
+			break;
 
+		case "Subtraction":
+			result = (values.nr1) - (values.nr2);
 			break;
-		case 1:
-			result = (+nr1) - (+nr2);
+
+		case "Multiplication":
+			result = (values.nr1) * (values.nr2);
 			break;
-		case 2:
-			result = (+nr1) * (+nr2);
+
+		case "Division":
+			result = (values.nr1) / (values.nr2);
 			break;
-		case 3:
-			result = (+nr1) / (+nr2);
-			break;
-		case 4:
-			result = Math.pow((+nr1), (+nr2));
+
+		case "Pow":
+			result = Math.pow((values.nr1), (values.nr2));
 			break;
 	}
 
