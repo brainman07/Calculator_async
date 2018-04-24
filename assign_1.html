@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>1st assignment</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	
+    <title>1st assignment</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
 </head>
 
 <body>
-	<form onsubmit="return false">
-		
+    <form onsubmit="return false">
+        
+        <!--#######   Numbers fields   #######-->
+        <p>1st number :  <input type="number" id="firstNumber" value="0"></p>
+        <p>2nd number: <input type="number" id="secondNumber" value="0"></p>
 
-		<!--#######   Numbers fields   #######-->
-		<p>1st number :  <input type="number" id="firstNumber" value="0"></p>
-		<p>2nd number: <input type="number" id="secondNumber" value="0"></p>
+        <!--#######   Operations drop down list #######-->
+        Operation : <select id="dropdown1">
+            <option value="Addition">Add (+)</option>
+            <option value="Subtraction">Subtract (-)</option>
+            <option value="Multiplication">Multiply (*)</option>
+            <option value="Division">Divide (/)</option>
+            <option value="Pow">x to the y power (x^y)</option>
+        </select><br><br>
 
-		<!--#######   Operations drop down list #######-->
-		Operation : <select id="dropdown1">
-			<option value="Addition">Add (+)</option>
-			<option value="Subtraction">Subtract (-)</option>
-			<option value="Multiplication">Multiply (*)</option>
-			<option value="Division">Divide (/)</option>
-			<option value="Pow">x to the y power (x^y)</option>
-		</select><br><br>
+        <!--#######   Calculate button   #######-->
+        <input type="submit" id="calculate" value="Result :" onclick="executeOperation()">
+        <p id="result">0</p>
+    </form>
 
-		<!--#######   Calculate button   #######-->
-		<input type="submit" id="calculate" value="Result :" onclick="execute_operation()">
-		<p id="result">0</p>
-	</form>
-
-	<script type="text/javascript" src="calculate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    
+    <script type="text/javascript" src="calculate.js"></script>
 
 </body>
 </html>
