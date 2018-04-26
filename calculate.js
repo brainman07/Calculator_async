@@ -15,8 +15,8 @@ function getOperation()
 {
     var option = $("#dropdown1 option:selected");
     //return dropdown.options[dropdown.selectedIndex].value;
-    console.log($("#dropdown1 option:selected").text());
-    return $("#dropdown1 option:selected").val();
+    //console.log($("#dropdown1 option:checked").val());
+    return $("#dropdown1 option:checked").val();
 }
 
 function executeOperation()
