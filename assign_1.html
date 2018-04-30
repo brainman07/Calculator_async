@@ -7,11 +7,11 @@
 </head>
 
 <body>
-    <form onsubmit="return false">
+    <form onsubmit="return false" method="get">
         
         <!--#######   Numbers fields   #######-->
-        <p>1st number :  <input type="number" id="firstNumber" value="0"></p>
-        <p>2nd number: <input type="number" id="secondNumber" value="0"></p>
+        <p>1st number :  <input type="number" id="firstNumber" name="firstNumber" value="0"></p>
+        <p>2nd number: <input type="number" id="secondNumber" name="secondNumber" value="0"></p>
 
         <!--#######   Operations drop down list #######-->
         Operation : <select id="dropdown1">
@@ -30,7 +30,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     
-    <script type="text/javascript" src="calculate.js"></script>
+    <script>
+        $(function() {            // <=> $("document").ready(function() {
+            var script = document.createElement("script");
+            script.src = "calculate.js";
+            document.body.appendChild(script);
+        })
+    </script>
 
 </body>
 </html>
