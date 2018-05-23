@@ -3,8 +3,7 @@ function getNumbers()
     var firstNumber = $("#firstNumber").val();
     //console.log(typeof $("#firstNumber"));
     var secondNumber = $("#secondNumber").val();
-    var values = 
-    {
+    var values = {
         nr1:(+firstNumber), 
         nr2:(+secondNumber)
     };
@@ -19,32 +18,23 @@ function getOperation()
     return $("#dropdown1 option:checked").val();
 }
 
-function executeOperation()
+function sendValues()
 {
-    var values = getNumbers();
-    var result = 0;
+    var values = getNumbers(),
+        result = 0,
+        xhttp = new XMLHttpRequest();
 
-    switch (getOperation()){
-        case "Addition":
-            result = (values.nr1) + (values.nr2);
-            break;
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            $("#result").html(this.responseText);
+        }
+    };
 
-        case "Subtraction":
-            result = (values.nr1) - (values.nr2);
-            break;
+    //xhttp.open("POST", "http://localhost:8080/server.js", true);
+    xhttp.open("GET", `http://localhost:8080/server.js?firstNumber=${values.nr1}
+        &secondNumber=${values.nr2}&operation=${getOperation()}`, true);
+    //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //xhttp.send(`firstNumber=${values.nr1}&secondNumber=${values.nr2}&operation=${getOperation()}`);
+    xhttp.send();
 
-        case "Multiplication":
-            result = (values.nr1) * (values.nr2);
-            break;
-
-        case "Division":
-            result = (values.nr1) / (values.nr2);
-            break;
-
-        case "Pow":
-            result = Math.pow((values.nr1), (values.nr2));
-            break;
-    }
-
-    $("#result").html(result);
 }
