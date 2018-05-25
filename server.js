@@ -3,8 +3,9 @@ var qs = require('querystring');
 
 http.createServer(function (req, res) {
 	
-	var result = 0, nr1, nr2;
-	var post;
+	if (req.method == 'GET') {
+		console.log("smth");
+	}
 
 	if (req.method == 'POST') {
 		var body = '';
@@ -19,9 +20,12 @@ http.createServer(function (req, res) {
 		});
 
 		req.on('end', function() {
+			let result = 0, nr1, nr2;
+			let post;
+
 			post = qs.parse(body);
 			nr1 = post.firstNumber;
-			console.log(nr1);
+			//console.log(nr1);
 			nr2 = post.secondNumber;
 
 			switch (post.operation) {
