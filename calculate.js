@@ -1,7 +1,6 @@
 function getNumbers()
 {
     var firstNumber = $("#firstNumber").val();
-    //console.log(typeof $("#firstNumber"));
     var secondNumber = $("#secondNumber").val();
     var values = {
         nr1:(+firstNumber), 
@@ -14,7 +13,6 @@ function getOperation()
 {
     var option = $("#dropdown1 option:selected");
     //return dropdown.options[dropdown.selectedIndex].value;
-    //console.log($("#dropdown1 option:checked").val());
     return $("#dropdown1 option:checked").val();
 }
 
