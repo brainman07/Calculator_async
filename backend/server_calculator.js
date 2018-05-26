@@ -31,12 +31,12 @@ function calculateResult(nr1, nr2, operation) {
     return result;
 }
 
-http.createServer(function (req, res) {
+http.createServer((req, res) => {
 
     const projectPath = path.join(__dirname, '..');
 
     if ((req.method == 'GET') && (req.url.indexOf("assign_1.html") != -1)) {
-        fs.readFile(projectPath + "\\frontend\\assign_1.html", function(err, data) {
+        fs.readFile(projectPath + "\\frontend\\assign_1.html", (err, data) => {
             res.writeHead(200, {'Content-type': 'text/html'});
             res.write(data);
             res.end();
@@ -46,7 +46,7 @@ http.createServer(function (req, res) {
     };
 
     if ((req.method == 'GET') && (req.url.indexOf("style.css") != -1)) {
-        fs.readFile(projectPath + "\\frontend\\style.css", function(err, data) {
+        fs.readFile(projectPath + "\\frontend\\style.css", (err, data) => {
             res.writeHead(200, {'Content-type': 'text/css'});
             res.write(data);
             res.end();
@@ -54,7 +54,7 @@ http.createServer(function (req, res) {
     };
 
     if ((req.method == 'GET') && (req.url.indexOf("dom_operations.js") != -1)) {
-        fs.readFile(projectPath + "\\frontend\\dom_operations.js", function(err, data) {
+        fs.readFile(projectPath + "\\frontend\\dom_operations.js", (err, data) => {
             res.writeHead(200, {'Content-type': 'application/javascript'});
             res.write(data);
             res.end();
@@ -62,7 +62,7 @@ http.createServer(function (req, res) {
     };
 
     if ((req.method == 'GET') && (req.url.indexOf("local_calculator.js") != -1)) {
-        fs.readFile(projectPath + "\\frontend\\local_calculator.js", function(err, data) {
+        fs.readFile(projectPath + "\\frontend\\local_calculator.js", (err, data) => {
             res.writeHead(200, {'Content-type': 'application/javascript'});
             res.write(data);
             res.end();
@@ -88,7 +88,7 @@ http.createServer(function (req, res) {
     if (req.method == 'POST') {
         var body = '';
 
-        req.on('data', function (data) {
+        req.on('data', (data) => {
             body += data;
 
             // Too much POST data => kill the connection
@@ -97,7 +97,7 @@ http.createServer(function (req, res) {
                 req.connection.destroy();
         });
 
-        req.on('end', function() {
+        req.on('end', () => {
             let result = 0, nr1, nr2;
             let post;
 

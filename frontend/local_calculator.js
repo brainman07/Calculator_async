@@ -4,7 +4,7 @@ function sendValues()
         result = 0,
         xhttp = new XMLHttpRequest();
 
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = () => {
         if (this.readyState == 4 && this.status == 200) {
             $("#result").html(this.responseText);
         }
