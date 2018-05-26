@@ -73,8 +73,8 @@ http.createServer((req, res) => {
         const query = url.parse(req.url, true).query;
         let result = 0, nr1, nr2;
 
-        nr1 = query.firstNumber;
-        nr2 = query.secondNumber;
+        nr1 = Number(query.firstNumber);
+        nr2 = Number(query.secondNumber);
 
         res.writeHead(200, {'Content-type': 'text/plain',
                 'Access-Control-Allow-Origin': '*',
