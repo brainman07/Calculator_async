@@ -29,15 +29,23 @@ http.createServer(function (req, res) {
 		});
 	};
 
-	if ((req.method == 'GET') && (req.url.indexOf("calculate.js") != -1)) {
-		fs.readFile("calculate.js", function(err, data) {
+	if ((req.method == 'GET') && (req.url.indexOf("dom_operations.js") != -1)) {
+		fs.readFile("dom_operations.js", function(err, data) {
 			res.writeHead(200, {'Content-type': 'application/javascript'});
 			res.write(data);
 			res.end();
 		});
 	};
 
-	if (req.method == 'GET' && (req.url.indexOf("server.js") != -1)) {
+	if ((req.method == 'GET') && (req.url.indexOf("local_calculator.js") != -1)) {
+		fs.readFile("local_calculator.js", function(err, data) {
+			res.writeHead(200, {'Content-type': 'application/javascript'});
+			res.write(data);
+			res.end();
+		});
+	};
+
+	if (req.method == 'GET' && (req.url.indexOf("server_calculator.js") != -1)) {
 		const query = url.parse(req.url, true).query;
 		let result = 0, nr1, nr2;
 
