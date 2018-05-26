@@ -11,7 +11,6 @@ function getNumbers()
 
 function getOperation()
 {
-    var option = $("#dropdown1 option:selected");
     //return dropdown.options[dropdown.selectedIndex].value;
     return $("#dropdown1 option:checked").val();
 }
