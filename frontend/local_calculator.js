@@ -1,17 +1,26 @@
-function calculate(values, operation)
-{
-    var xhttp = new XMLHttpRequest();
+const localCalculator = {
+    calculate: function(values, operation) {
+        switch (operation) {
+            case "Addition":
+                result = (values.nr1) + (values.nr2);
+                break;
 
-    xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            $("#result").html(xhttp.responseText);
+            case "Subtraction":
+                result = (values.nr1) - (values.nr2);
+                break;
+
+            case "Multiplication":
+                result = (values.nr1) * (values.nr2);
+                break;
+
+            case "Division":
+                result = (values.nr1) / (values.nr2);
+                break;
+
+            case "Pow":
+                result = Math.pow(values.nr1, values.nr2);
+                break;
         }
-    };
-
-    //xhttp.open("POST", "http://localhost:8080/server.js", true);
-    xhttp.open("GET", `http://localhost:8080/server_calculator.js?firstNumber=${values.nr1}
-        &secondNumber=${values.nr2}&operation=${operation}`, true);
-    //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    //xhttp.send(`firstNumber=${values.nr1}&secondNumber=${values.nr2}&operation=${getOperation()}`);
-    xhttp.send();
+        $("#result").html(result);
+    }
 }

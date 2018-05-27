@@ -53,8 +53,8 @@ http.createServer((req, res) => {
         });
     };
 
-    if ((req.method == 'GET') && (req.url.indexOf("dom_operations.js") != -1)) {
-        fs.readFile(projectPath + "\\frontend\\dom_operations.js", (err, data) => {
+    if ((req.method == 'GET') && (req.url.indexOf("app.js") != -1)) {
+        fs.readFile(projectPath + "\\frontend\\app.js", (err, data) => {
             res.writeHead(200, {'Content-type': 'application/javascript'});
             res.write(data);
             res.end();
@@ -63,6 +63,14 @@ http.createServer((req, res) => {
 
     if ((req.method == 'GET') && (req.url.indexOf("local_calculator.js") != -1)) {
         fs.readFile(projectPath + "\\frontend\\local_calculator.js", (err, data) => {
+            res.writeHead(200, {'Content-type': 'application/javascript'});
+            res.write(data);
+            res.end();
+        });
+    };
+
+    if ((req.method == 'GET') && (req.url.indexOf("remote_calculator.js") != -1)) {
+        fs.readFile(projectPath + "\\frontend\\remote_calculator.js", (err, data) => {
             res.writeHead(200, {'Content-type': 'application/javascript'});
             res.write(data);
             res.end();
