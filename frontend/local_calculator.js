@@ -21,6 +21,11 @@ const localCalculator = {
                 result = Math.pow(values.nr1, values.nr2);
                 break;
         }
-        $("#result").html(result);
+        // setTimeout( () => {return result}, 3000);
+        // $("#result").html(result);
+
+        return new Promise( (resolve, reject) => {
+            resolve(result); // reject(err)
+        });
     }
 }

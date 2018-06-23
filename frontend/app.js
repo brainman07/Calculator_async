@@ -21,10 +21,11 @@ function getCalculator() {
 	else return localCalculator;
 }
 
-function calculate() {
+async function calculate() {
 	var values = getNumbers();
 	var operation = getOperation();
 	var calculator = getCalculator();
 
-	calculator.calculate(values, operation);
+    const result = await calculator.calculate(values, operation);
+    $("#result").html(result);
 }
