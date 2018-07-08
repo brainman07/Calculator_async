@@ -17,8 +17,8 @@ function getOperation()
 
 function getCalculator() {
 	if ($('#local_or_remote')[0].checked)
-		return serverCalculator;
-	else return localCalculator;
+		return new ServerCalculator();
+	else return new LocalCalculator();
 }
 
 async function calculate() {

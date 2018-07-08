@@ -1,5 +1,5 @@
-const localCalculator = {
-    calculate: function(values, operation) {
+class LocalCalculator {
+    calculate (values, operation) {
         switch (operation) {
             case "Addition":
                 result = (values.nr1) + (values.nr2);

@@ -4,31 +4,43 @@ var url = require('url');
 var fs = require('fs');
 var path = require('path');
 
-function calculateResult(nr1, nr2, operation) {
-    let result = 0;
+class Calculator {
+    calculateResult (nr1, nr2, operation) {
+        let result = 0;
     
-    switch (operation) {
-        case "Addition":
-            result = (nr1) + (nr2);
-            break;
+        switch (operation) {
+            case "Addition":
+                result = (nr1) + (nr2);
+                break;
 
-        case "Subtraction":
-            result = (nr1) - (nr2);
-            break;
+            case "Subtraction":
+                result = (nr1) - (nr2);
+                break;
 
-        case "Multiplication":
-            result = (nr1) * (nr2);
-            break;
+            case "Multiplication":
+                result = (nr1) * (nr2);
+                break;
 
-        case "Division":
-            result = (nr1) / (nr2);
-            break;
+            case "Division":
+                result = (nr1) / (nr2);
+                break;
 
-        case "Pow":
-            result = Math.pow(nr1, nr2);
-            break;
+            case "Pow":
+                result = Math.pow(nr1, nr2);
+                break;
+        }
+        return result;
     }
-    return result;
+}
+
+class HistoryEntry {
+    constructor(timestamp, operation, number1, number2, result) {
+        this.timestamp = timestamp;
+        this.operation = operation;
+        this.number1 = number1;
+        this.number2 = number2;
+        this.result = result;
+    }
 }
 
 http.createServer((req, res) => {
@@ -89,7 +101,7 @@ http.createServer((req, res) => {
                 'Access-Control-Allow-Methods': 'GET, POST',
                 'Access-Control-Allow-Headers': '*'
             });
-        res.write(calculateResult(nr1, nr2, query.operation).toString());
+        res.write(new Calculator().calculateResult(nr1, nr2, query.operation).toString());
         res.end();
     }
 
@@ -118,7 +130,7 @@ http.createServer((req, res) => {
                 'Access-Control-Allow-Methods': 'GET, POST',
                 'Access-Control-Allow-Headers': '*'
             });
-            res.write(calculateResult(nr1, nr2, post.operation).toString());
+            res.write(new Calculator().calculateResult(nr1, nr2, post.operation).toString());
             res.end();
         });
     };
