@@ -1,0 +1,12 @@
+CREATE database calculator_db
+
+CREATE TABLE History (
+	EntryID int NOT NULL AUTO_INCREMENT,
+    Operation varchar(255),
+    Number1 int,
+    Number2 int,
+    Result float,
+    Time_stamp  TIMESTAMP,
+    PRIMARY KEY (EntryID)
+);
+

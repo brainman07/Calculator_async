@@ -1,8 +1,17 @@
-var http = require("http");
-var qs = require('querystring');
-var url = require('url');
-var fs = require('fs');
-var path = require('path');
+const http = require("http");
+const qs = require('querystring');
+const url = require('url');
+const fs = require('fs');
+const path = require('path');
+const SqlHistoryStorage = require('./SqlHistoryStorage');
+const HistoryEntry = require('./HistoryEntry');
+
+const db = {
+    host: "localhost",
+    user: "root",
+    password: "qwer",
+    database: "calculator_db",
+};
 
 class Calculator {
     calculateResult (nr1, nr2, operation) {
@@ -33,15 +42,7 @@ class Calculator {
     }
 }
 
-class HistoryEntry {
-    constructor(timestamp, operation, number1, number2, result) {
-        this.timestamp = timestamp;
-        this.operation = operation;
-        this.number1 = number1;
-        this.number2 = number2;
-        this.result = result;
-    }
-}
+var sqlStorage = new SqlHistoryStorage(db);
 
 http.createServer((req, res) => {
 
@@ -101,7 +102,12 @@ http.createServer((req, res) => {
                 'Access-Control-Allow-Methods': 'GET, POST',
                 'Access-Control-Allow-Headers': '*'
             });
-        res.write(new Calculator().calculateResult(nr1, nr2, query.operation).toString());
+        result = new Calculator().calculateResult(nr1, nr2, query.operation).toString();
+
+        entry = new HistoryEntry(query.operation, nr1, nr2, result, new Date());
+        sqlStorage.saveHistoryEntry(entry);
+
+        res.write(result);
         res.end();
     }
 
@@ -130,7 +136,12 @@ http.createServer((req, res) => {
                 'Access-Control-Allow-Methods': 'GET, POST',
                 'Access-Control-Allow-Headers': '*'
             });
-            res.write(new Calculator().calculateResult(nr1, nr2, post.operation).toString());
+            result = new Calculator().calculateResult(nr1, nr2, post.operation).toString();
+
+            entry = new HistoryEntry(post.operation, nr1, nr2, result, new Date());
+            sqlStorage.saveHistoryEntry(entry);
+
+            res.write(result);
             res.end();
         });
     };
