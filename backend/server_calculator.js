@@ -106,8 +106,14 @@ http.createServer((req, res) => {
 
         entry = new HistoryEntry(query.operation, nr1, nr2, result, new Date());
         sqlStorage.saveHistoryEntry(entry);
+        console.log(sqlStorage.getHistory());
 
         res.write(result);
+        res.end();
+    }
+
+    if (req.method == 'GET' && (req.url.indexOf("history") != -1)) {
+        res.write(sqlStorage.getHistory());
         res.end();
     }
 

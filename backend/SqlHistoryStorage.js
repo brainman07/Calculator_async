@@ -25,14 +25,16 @@ module.exports = class SqlHistoryStorage {
     }
 
     getHistory() {
-        const query = "SELECT * FROM history LIMIT 10";
+        const query = "SELECT * FROM history";
+        var history;
 
         this.con.query(query, (err, result) => {
             if (err) {
                 console.log(err);
             } else {
-                return result;
+                console.log(result);
             };
         });
+        return history;
     }
 }

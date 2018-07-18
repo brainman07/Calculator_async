@@ -1,7 +1,37 @@
+#calcForm {
+    float: left;
+    width: 250px;
+    border: 1px solid black;
+    border-width: 1px;
+    padding: 0px 10px 5px 10px;
+}
+
+#historyTable {
+    /* float: right;
+    width: calc(100%-300px); */
+    border-collapse: collapse;
+    margin: 0px 0px 0px 5px;
+    display:inline-block;
+}
+
+#historyTable td, #historyTable th {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+#historyTable tr:hover {
+    background-color: #ddd;
+}
+
+#historyTable th {
+    background-color: aquamarine;
+}
+
 #resultButton {
     display:inline-block;
     margin-right:10px;
 } 
+
 #result {
     display:inline-block;
 } 
