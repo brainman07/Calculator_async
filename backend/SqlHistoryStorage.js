@@ -39,7 +39,7 @@ module.exports = class SqlHistoryStorage {
             if (err) {
                 console.log(err);
             } else {
-                console.log(result);
+                history = result;
             };
         });
         this.con.end();
