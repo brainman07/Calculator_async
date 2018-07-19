@@ -2,7 +2,11 @@ const mysql = require('mysql');
 
 module.exports = class SqlHistoryStorage {
     constructor(db) {
-        this.con = mysql.createConnection(db);
+        this.db = db;
+    }
+
+    createConnection() {
+        this.con = mysql.createConnection(this.db);
 
         this.con.connect((err) => {
             if (err) {
@@ -12,6 +16,7 @@ module.exports = class SqlHistoryStorage {
     }
 
     saveHistoryEntry(entry) {
+        this.createConnection();
         const query =  `INSERT INTO history 
                         (Operation, Number1, Number2, Result, Time_stamp) 
                         VALUES ('${entry.operation}', ${entry.number1}, ${entry.number2}, ${entry.result}, 
@@ -22,9 +27,11 @@ module.exports = class SqlHistoryStorage {
                 console.log("Error executing saveHistoryEntry query.");
             };
         });
+        this.con.end();
     }
 
     getHistory() {
+        this.createConnection();
         const query = "SELECT * FROM history";
         var history;
 
@@ -35,6 +42,7 @@ module.exports = class SqlHistoryStorage {
                 console.log(result);
             };
         });
+        this.con.end();
         return history;
     }
 }
