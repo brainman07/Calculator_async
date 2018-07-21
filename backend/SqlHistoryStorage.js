@@ -21,13 +21,16 @@ module.exports = class SqlHistoryStorage {
                         (Operation, Number1, Number2, Result, Time_stamp) 
                         VALUES ('${entry.operation}', ${entry.number1}, ${entry.number2}, ${entry.result}, 
                         '${entry.timestamp.getFullYear()}-${entry.timestamp.getMonth()+1}-${entry.timestamp.getDate()} ${entry.timestamp.getHours()}:${entry.timestamp.getMinutes()}:${entry.timestamp.getSeconds()}')`;
-        try {
-            await this.con.query(query);
-        }
-        catch {
-            console.log("Error executing saveHistoryEntry query.");
-        }
-        this.con.end();
+        return new Promise( (resolve, reject) => {
+            try {
+                await this.con.query(query);
+            }
+            catch {
+                console.log("Error executing saveHistoryEntry query.");
+            }
+            this.con.end();
+            resolve();
+        });
     }
 
     async getHistory() {
@@ -35,14 +38,16 @@ module.exports = class SqlHistoryStorage {
         const query = "SELECT * FROM history";
         var history;
 
-        this.con.query(query, (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                history = result;
-            };
+        return new Promise( (resolve, reject) => {
+            this.con.query(query, (err, result) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    history = result;
+                };
+            });
+            this.con.end();
+            resolve(history);
         });
-        this.con.end();
-        return history;
     }
 }
