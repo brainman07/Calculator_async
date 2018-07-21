@@ -5,15 +5,19 @@ module.exports = class SqlHistoryStorage {
         this.db = db;
     }
 
-    createConnection() {
-        con = mysql.createConnection(this.db);
+    async createConnection() {
+        return new Promise(async (resolve, reject) => {
+            const con = await mysql.createConnection(this.db);
 
-        con.connect((err) => {
-            if (err) {
-                console.log('Error connecting to the db.');
-            };
+            con.connect((err) => {
+                if (err) {
+                    reject('Error connecting to the db.');
+                }
+                else {
+                    resolve(con);
+                }
+            });
         });
-        return con;
     }
 
     async saveHistoryEntry(entry) {
@@ -21,7 +25,7 @@ module.exports = class SqlHistoryStorage {
                         (Operation, Number1, Number2, Result, Time_stamp) 
                         VALUES ('${entry.operation}', ${entry.number1}, ${entry.number2}, ${entry.result}, 
                         '${entry.timestamp.getFullYear()}-${entry.timestamp.getMonth()+1}-${entry.timestamp.getDate()} ${entry.timestamp.getHours()}:${entry.timestamp.getMinutes()}:${entry.timestamp.getSeconds()}')`;
-                        
+
         return new Promise(async (resolve, reject) => {
             const con = await this.createConnection();
             con.query(query, (result, err) => {
@@ -31,7 +35,7 @@ module.exports = class SqlHistoryStorage {
                 }
                 else {
                     resolve(result);
-                }
+                };
             });
         });
     }

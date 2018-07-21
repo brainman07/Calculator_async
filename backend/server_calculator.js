@@ -44,7 +44,7 @@ class Calculator {
 
 var sqlStorage = new SqlHistoryStorage(db);
 
-http.createServer((req, res) => {
+http.createServer(async (req, res) => {
 
     const projectPath = path.join(__dirname, '..');
 
