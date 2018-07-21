@@ -1,3 +1,4 @@
+const HistoryEntry = require('./HistoryEntry');
 const mysql = require('mysql');
 
 module.exports = class SqlHistoryStorage {
@@ -11,7 +12,7 @@ module.exports = class SqlHistoryStorage {
 
             con.connect((err) => {
                 if (err) {
-                    reject('Error connecting to the db.');
+                    reject(err);
                 }
                 else {
                     resolve(con);
@@ -28,7 +29,7 @@ module.exports = class SqlHistoryStorage {
             con.query(query, (err, result) => {
                 con.end();
                 if (err) {
-                    reject("Error executing saveHistoryEntry query.");
+                    reject(err);
                 }
                 else {
                     resolve(result);
@@ -45,9 +46,13 @@ module.exports = class SqlHistoryStorage {
             con.query(query, (err, result) => {
                 con.end();
                 if (err) {
-                    reject("Error executing getHistory query.");
+                    reject(err);
                 } else {
-                    resolve(result);
+                    const entries = result.map((entry) => {
+                        return new HistoryEntry(entry.Operation, entry.Number1, entry.Number2, 
+                                        entry.Result, entry.Time_stamp);
+                    });
+                    resolve(entries);
                 };
             });
         });

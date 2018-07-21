@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const SqlHistoryStorage = require('./SqlHistoryStorage');
 const HistoryEntry = require('./HistoryEntry');
+const Calculator = require('./Calculator');
 
 const db = {
     host: "localhost",
@@ -12,35 +13,6 @@ const db = {
     password: "qwer",
     database: "calculator_db",
 };
-
-class Calculator {
-    calculateResult (nr1, nr2, operation) {
-        let result = 0;
-    
-        switch (operation) {
-            case "Addition":
-                result = (nr1) + (nr2);
-                break;
-
-            case "Subtraction":
-                result = (nr1) - (nr2);
-                break;
-
-            case "Multiplication":
-                result = (nr1) * (nr2);
-                break;
-
-            case "Division":
-                result = (nr1) / (nr2);
-                break;
-
-            case "Pow":
-                result = Math.pow(nr1, nr2);
-                break;
-        }
-        return result;
-    }
-}
 
 var sqlStorage = new SqlHistoryStorage(db);
 
