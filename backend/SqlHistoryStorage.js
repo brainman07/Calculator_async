@@ -28,7 +28,7 @@ module.exports = class SqlHistoryStorage {
 
         return new Promise(async (resolve, reject) => {
             const con = await this.createConnection();
-            con.query(query, (result, err) => {
+            con.query(query, (err, result) => {
                 con.end();
                 if (err) {
                     reject("Error executing saveHistoryEntry query.");
@@ -45,7 +45,7 @@ module.exports = class SqlHistoryStorage {
 
         return new Promise(async (resolve, reject) => {
             const con = await this.createConnection();
-            con.query(query, (result, err) => {
+            con.query(query, (err, result) => {
                 con.end();
                 if (err) {
                     reject("Error executing getHistory query.");
