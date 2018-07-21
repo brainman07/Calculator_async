@@ -105,15 +105,16 @@ http.createServer((req, res) => {
         result = new Calculator().calculateResult(nr1, nr2, query.operation).toString();
 
         entry = new HistoryEntry(query.operation, nr1, nr2, result, new Date());
-        sqlStorage.saveHistoryEntry(entry);
-        console.log(sqlStorage.getHistory());
+        await sqlStorage.saveHistoryEntry(entry);
 
         res.write(result);
         res.end();
     }
 
-    if (req.method == 'GET' && (req.url.indexOf("history") != -1)) {
-        res.write(sqlStorage.getHistory());
+    if (req.method == 'GET' && (req.url.indexOf("getHistory") != -1)) {
+        const history = await sqlStorage.getHistory();
+        console.log(history);
+        res.write(history);
         res.end();
     }
 

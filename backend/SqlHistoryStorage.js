@@ -15,22 +15,22 @@ module.exports = class SqlHistoryStorage {
         });
     }
 
-    saveHistoryEntry(entry) {
+    async saveHistoryEntry(entry) {
         this.createConnection();
         const query =  `INSERT INTO history 
                         (Operation, Number1, Number2, Result, Time_stamp) 
                         VALUES ('${entry.operation}', ${entry.number1}, ${entry.number2}, ${entry.result}, 
                         '${entry.timestamp.getFullYear()}-${entry.timestamp.getMonth()+1}-${entry.timestamp.getDate()} ${entry.timestamp.getHours()}:${entry.timestamp.getMinutes()}:${entry.timestamp.getSeconds()}')`;
-
-        this.con.query(query, (err) => {
-            if (err) {
-                console.log("Error executing saveHistoryEntry query.");
-            };
-        });
+        try {
+            await this.con.query(query);
+        }
+        catch {
+            console.log("Error executing saveHistoryEntry query.");
+        }
         this.con.end();
     }
 
-    getHistory() {
+    async getHistory() {
         this.createConnection();
         const query = "SELECT * FROM history";
         var history;

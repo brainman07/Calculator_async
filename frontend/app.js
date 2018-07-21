@@ -30,7 +30,7 @@ async function calculate() {
     $("#result").html(result);
 }
 
-function getHistory() {
-    const history = fetch("http://localhost:8080/server_calculator.js?message='history'");
+async function getHistory() {
+    const history = await fetch("http://localhost:8080/server_calculator.js?message='getHistory'");
     
 }
