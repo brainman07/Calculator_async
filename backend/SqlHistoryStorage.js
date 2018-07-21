@@ -21,10 +21,7 @@ module.exports = class SqlHistoryStorage {
     }
 
     async saveHistoryEntry(entry) {
-        const query =  `INSERT INTO history 
-                        (Operation, Number1, Number2, Result, Time_stamp) 
-                        VALUES ('${entry.operation}', ${entry.number1}, ${entry.number2}, ${entry.result}, 
-                        '${entry.timestamp.getFullYear()}-${entry.timestamp.getMonth()+1}-${entry.timestamp.getDate()} ${entry.timestamp.getHours()}:${entry.timestamp.getMinutes()}:${entry.timestamp.getSeconds()}')`;
+        const query =  `INSERT INTO history (Operation, Number1, Number2, Result, Time_stamp) VALUES ('${entry.operation}', ${entry.number1}, ${entry.number2}, ${entry.result}, '${entry.timestamp.getFullYear()}-${entry.timestamp.getMonth()+1}-${entry.timestamp.getDate()} ${entry.timestamp.getHours()}:${entry.timestamp.getMinutes()}:${entry.timestamp.getSeconds()}')`;
 
         return new Promise(async (resolve, reject) => {
             const con = await this.createConnection();

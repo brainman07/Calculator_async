@@ -90,7 +90,7 @@ http.createServer(async (req, res) => {
         });
     };
 
-    if (req.method == 'GET' && (req.url.indexOf("server_calculator.js") != -1)) {
+    if (req.method == 'GET' && (req.url.indexOf("operation") != -1)) {
         const query = url.parse(req.url, true).query;
         let result = 0, nr1, nr2;
 
@@ -114,43 +114,43 @@ http.createServer(async (req, res) => {
     if (req.method == 'GET' && (req.url.indexOf("getHistory") != -1)) {
         const history = await sqlStorage.getHistory();
         console.log(history);
-        res.write(history);
+        res.write(JSON.stringify(history));
         res.end();
     }
 
-    if (req.method == 'POST') {
-        var body = '';
+    // if (req.method == 'POST') {
+    //     var body = '';
 
-        req.on('data', (data) => {
-            body += data;
+    //     req.on('data', (data) => {
+    //         body += data;
 
-            // Too much POST data => kill the connection
-            if (body.length > 1e6)
-                res.writeHead(413, {'Content-type': 'text/plain'}).end();
-                req.connection.destroy();
-        });
+    //         // Too much POST data => kill the connection
+    //         if (body.length > 1e6)
+    //             res.writeHead(413, {'Content-type': 'text/plain'}).end();
+    //             req.connection.destroy();
+    //     });
 
-        req.on('end', () => {
-            let result = 0, nr1, nr2;
-            let post;
+    //     req.on('end', () => {
+    //         let result = 0, nr1, nr2;
+    //         let post;
 
-            post = qs.parse(body);
-            nr1 = post.firstNumber;
-            nr2 = post.secondNumber;
+    //         post = qs.parse(body);
+    //         nr1 = post.firstNumber;
+    //         nr2 = post.secondNumber;
 
-            res.writeHead(200, {'Content-type': 'text/plain',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST',
-                'Access-Control-Allow-Headers': '*'
-            });
-            result = new Calculator().calculateResult(nr1, nr2, post.operation).toString();
+    //         res.writeHead(200, {'Content-type': 'text/plain',
+    //             'Access-Control-Allow-Origin': '*',
+    //             'Access-Control-Allow-Methods': 'GET, POST',
+    //             'Access-Control-Allow-Headers': '*'
+    //         });
+    //         result = new Calculator().calculateResult(nr1, nr2, post.operation).toString();
 
-            entry = new HistoryEntry(post.operation, nr1, nr2, result, new Date());
-            sqlStorage.saveHistoryEntry(entry);
+    //         entry = new HistoryEntry(post.operation, nr1, nr2, result, new Date());
+    //         sqlStorage.saveHistoryEntry(entry);
 
-            res.write(result);
-            res.end();
-        });
-    };
+    //         res.write(result);
+    //         res.end();
+    //     });
+    // };
 
 }).listen(8080);
