@@ -36,7 +36,6 @@ http.createServer(async (req, res) => {
 
     if (req.method == 'GET' && (req.url.indexOf("getHistory") != -1)) {
         const history = await sqlStorage.getHistory();
-        console.log(history);
 
         res.write(JSON.stringify(history));
         res.end();

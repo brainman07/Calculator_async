@@ -29,5 +29,7 @@ async function calculate() {
     const result = await calculator.calculate(values, operation);
     $("#result").html(result);
 
-    const history = await fetch("http://localhost:8080/server_calculator.js?message='getHistory'");
+    const response = await fetch("http://localhost:8080/server_calculator.js?message='getHistory'");
+    const history = await JSON.parse(response.text());
+    console.log(history);
 }
