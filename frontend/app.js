@@ -29,7 +29,8 @@ async function calculate() {
     const result = await calculator.calculate(values, operation);
     $("#result").html(result);
 
-    var response = await fetch('http://localhost:8080/server_calculator.js?message="getHistory"');
+    const currentLocation = window.location.hostname;
+    var response = await fetch(`http://86.127.181.250:8080/server_calculator.js?message="getHistory"`);
     //console.log(response.text());
     //console.log(await response.text());
     const history = JSON.parse(await response.text());

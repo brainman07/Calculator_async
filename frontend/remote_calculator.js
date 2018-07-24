@@ -1,6 +1,8 @@
 class ServerCalculator {
     async calculate(values, operation) {
-        const response = await fetch(`http://localhost:8080/server_calculator.js
+        const currentLocation = window.location.hostname;
+
+        const response = await fetch(`http://86.127.181.250:8080/server_calculator.js
                                     ?firstNumber=${values.nr1}
                                     &secondNumber=${values.nr2}
                                     &operation=${operation}`);
