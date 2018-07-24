@@ -26,9 +26,9 @@ http.createServer(async (req, res) => {
         await sqlStorage.saveHistoryEntry(entry);
 
         res.writeHead(200, {'Content-type': 'text/plain',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST',
-                'Access-Control-Allow-Headers': '*'
+                            'Access-Control-Allow-Origin': '*',
+                            'Access-Control-Allow-Methods': 'GET, POST',
+                            'Access-Control-Allow-Headers': '*'
             });
         res.write(result);
         res.end();
@@ -37,7 +37,11 @@ http.createServer(async (req, res) => {
     if (req.method == 'GET' && (req.url.indexOf("getHistory") != -1)) {
         const history = await sqlStorage.getHistory();
 
-        res.write(JSON.stringify(history));
+        res.writeHead(200, {'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*'});
+        
+        const response = JSON.stringify(history);
+        res.write(response);
         res.end();
     }
 

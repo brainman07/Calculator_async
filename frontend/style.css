@@ -10,7 +10,7 @@
     /* float: right;
     width: calc(100%-300px); */
     border-collapse: collapse;
-    margin: 0px 0px 0px 5px;
+    margin: 0px 0px 0px 10px;
     display:inline-block;
 }
 
@@ -24,6 +24,7 @@
 }
 
 #historyTable th {
+    padding: 10px;
     background-color: aquamarine;
 }
 

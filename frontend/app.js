@@ -29,7 +29,22 @@ async function calculate() {
     const result = await calculator.calculate(values, operation);
     $("#result").html(result);
 
-    const response = await fetch("http://localhost:8080/server_calculator.js?message='getHistory'");
-    const history = await JSON.parse(response.text());
+    var response = await fetch('http://localhost:8080/server_calculator.js?message="getHistory"');
+    //console.log(response.text());
+    //console.log(await response.text());
+    const history = JSON.parse(await response.text());
     console.log(history);
+    
+    $('#historyTable td').remove();
+    for (var entryNumber in history) {
+        const entry = history[entryNumber];
+        
+        $(` <tr><td>${Number(entryNumber)+1}</td>
+                <td>${entry.operation}</td>
+                <td>${entry.number1}</td>
+                <td>${entry.number2}</td>
+                <td>${entry.result}</td>
+                <td>${entry.timestamp}</td>
+            </tr>`).appendTo('#historyTable tbody');
+    };
 }
