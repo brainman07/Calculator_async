@@ -39,7 +39,7 @@ module.exports = class SqlHistoryStorage {
     }
 
     async getHistory() {
-        const query = "SELECT * FROM history LIMIT 10";
+        const query = "SELECT * FROM history";
 
         return new Promise(async (resolve, reject) => {
             const con = await this.createConnection();

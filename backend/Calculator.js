@@ -19,7 +19,7 @@ module.exports = class Calculator {
                 result = (nr1) / (nr2);
                 break;
 
-            case "Pow":
+            case "Power":
                 result = Math.pow(nr1, nr2);
                 break;
         }

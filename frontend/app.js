@@ -30,7 +30,7 @@ async function calculate() {
     $("#result").html(result);
 
     const currentLocation = window.location.hostname;
-    var response = await fetch(`http://86.127.181.250:8080/server_calculator.js?message="getHistory"`);
+    var response = await fetch(`http://${currentLocation}:8080/server_calculator.js?message="getHistory"`);
     //console.log(response.text());
     //console.log(await response.text());
     const history = JSON.parse(await response.text());
