@@ -1,13 +1,18 @@
+const HistoryEntry = require('./HistoryEntry');
+const fs = require('fs').promises;
+
 module.exports = class FileHistoryStorage {
-    constructor(folderPath) {
-
+    constructor(filePath) {
+        this.filePath = filePath;
+        fs.writeFile(filePath, '');
     }
 
-    saveHistoryEntry(entry) {
-
+    async saveHistoryEntry(entry) {
+        await fs.appendFile(this.filePath, JSON.stringify(entry) + "\n");
     }
 
-    getHistory() {
-        
+    async getHistory() {
+        const data = JSON.parse(await fs.readFile(this.filePath));
+        return data;
     }
 }

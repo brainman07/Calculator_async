@@ -1,6 +1,8 @@
 const http = require("http");
 const url = require('url');
+const path = require('path');
 const SqlHistoryStorage = require('./SqlHistoryStorage');
+const FileHistoryStorage = require('./FileHistoryStorage');
 const HistoryEntry = require('./HistoryEntry');
 const Calculator = require('./Calculator');
 
@@ -11,7 +13,10 @@ const db = {
     database: "calculator_db",
 };
 
+const filePath = path.join(__dirname, "history.json");
+
 var sqlStorage = new SqlHistoryStorage(db);
+var fileStorage = new FileHistoryStorage(filePath);
 
 http.createServer(async (req, res) => {
 
@@ -23,7 +28,8 @@ http.createServer(async (req, res) => {
         const result = new Calculator().calculateResult(nr1, nr2, query.operation).toString();
 
         const entry = new HistoryEntry(query.operation, nr1, nr2, result, new Date());
-        await sqlStorage.saveHistoryEntry(entry);
+        // await sqlStorage.saveHistoryEntry(entry);
+        await fileStorage.saveHistoryEntry(entry);
 
         res.writeHead(200, {'Content-type': 'text/plain',
                             'Access-Control-Allow-Origin': '*',
@@ -35,7 +41,9 @@ http.createServer(async (req, res) => {
     }
 
     if (req.method == 'GET' && (req.url.indexOf("getHistory") != -1)) {
-        const history = await sqlStorage.getHistory();
+        // const history = await sqlStorage.getHistory();
+        const history = await fileStorage.getHistory();
+        console.log(history);
 
         res.writeHead(200, {'Content-Type': 'application/json',
                             'Access-Control-Allow-Origin': '*'});
