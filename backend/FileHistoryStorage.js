@@ -3,12 +3,14 @@ const fs = require('fs').promises;
 
 module.exports = class FileHistoryStorage {
     constructor(filePath) {
+        this.history = [];
         this.filePath = filePath;
         fs.writeFile(filePath, '');
     }
 
     async saveHistoryEntry(entry) {
-        await fs.appendFile(this.filePath, JSON.stringify(entry) + "\n");
+        this.history.push(entry);
+        await fs.writeFile(this.filePath, JSON.stringify(this.history) + "\n");
     }
 
     async getHistory() {

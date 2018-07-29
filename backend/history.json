@@ -1,2 +1,1 @@
-{"operation":"Division","number1":9,"number2":3,"result":"3","timestamp":"2018-07-28T21:38:05.336Z"}
-{"operation":"Multiplication","number1":6,"number2":3,"result":"18","timestamp":"2018-07-28T21:38:25.571Z"}
+[{"operation":"Addition","number1":4,"number2":1,"result":"5","timestamp":"2018-07-29T07:12:24.664Z"},{"operation":"Multiplication","number1":6,"number2":-2,"result":"-12","timestamp":"2018-07-29T07:12:34.101Z"},{"operation":"Subtraction","number1":9,"number2":3,"result":"6","timestamp":"2018-07-29T07:13:12.095Z"}]
