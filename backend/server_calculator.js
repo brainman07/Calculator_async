@@ -35,7 +35,7 @@ http.createServer(async (req, res) => {
                             'Access-Control-Allow-Origin': '*',
                             'Access-Control-Allow-Methods': 'GET, POST',
                             'Access-Control-Allow-Headers': '*'
-            });
+        });
         res.write(result);
         res.end();
     }
