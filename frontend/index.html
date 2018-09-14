@@ -8,35 +8,7 @@
 </head>
 
 <body>
-    <div id="calcForm">
-        <form onsubmit="return false" method="get">
-        
-            <!--#######   Numbers fields   #######-->
-            <p>1st number :  <input type="number" id="firstNumber" name="firstNumber" value="0"></p>
-            <p>2nd number: <input type="number" id="secondNumber" name="secondNumber" value="0"></p>
-    
-            <!--#######   Operations drop down list #######-->
-            Operation : <select id="dropdown1">
-                <option value="Addition">Add (+)</option>
-                <option value="Subtraction">Subtract (-)</option>
-                <option value="Multiplication">Multiply (*)</option>
-                <option value="Division">Divide (/)</option>
-                <option value="Power">x to the y power (x^y)</option>
-            </select><br><br>
-    
-            <div>
-                <input type="checkbox" id="local_or_remote" checked>
-                <label for="local_or_remote"> Calculate using server</label>
-            </div>
-    
-            <!--#######   Calculate button   #######-->
-            <input type="submit" id="resultButton" value="Result :" 
-                    onclick="calculate();">
-            
-            <p id="result">0</p>
-    
-        </form>
-    </div>
+    <div id="calcForm"> </div>
     
     <table id="historyTable">
         <tr>
@@ -48,6 +20,12 @@
             <th>Timestamp</th>
         </tr>
     </table>
+    
+    <!--#######   Load React components   #######-->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="components.js" type="text/babel"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
@@ -55,7 +33,9 @@
     <script src="app.js"></script>
     <script src="local_calculator.js"></script>
     <script src="remote_calculator.js"></script>
-<!--     <script>
+    <script src="components.js"></script>
+
+    <!-- <script>
         $(function() {            // <=> $("document").ready(function() {
             var script = document.createElement("script");
             script.src = "calculate.js";
