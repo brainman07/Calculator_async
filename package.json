@@ -1,0 +1,22 @@
+{
+  "name": "calculator_async",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server_calculator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brainman07/Calculator_async.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brainman07/Calculator_async/issues"
+  },
+  "homepage": "https://github.com/brainman07/Calculator_async#readme",
+  "dependencies": {
+    "mysql": "^2.16.0"
+  }
+}

@@ -90,7 +90,7 @@ class Result extends React.Component {
         return (
             <div>
                 <input type="submit" id="resultButton" value="Result :" onClick={calculate}/>
-                <p id="result" onChange={this.handleResultChanges}>
+                <p id="result" onChange={this.handleResultChange}>
                     {this.state.result}
                 </p>
             </div>

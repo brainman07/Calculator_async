@@ -5,6 +5,7 @@ const SqlHistoryStorage = require('./SqlHistoryStorage');
 const FileHistoryStorage = require('./FileHistoryStorage');
 const HistoryEntry = require('./HistoryEntry');
 const Calculator = require('./Calculator');
+//const cors = require('../node_modules/cors')
 
 const db = {
     host: "localhost",
@@ -33,8 +34,9 @@ http.createServer(async (req, res) => {
 
         res.writeHead(200, {'Content-type': 'text/plain',
                             'Access-Control-Allow-Origin': '*',
-                            'Access-Control-Allow-Methods': 'GET, POST',
-                            'Access-Control-Allow-Headers': '*'
+                            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                            'Access-Control-Allow-Headers': '*',
+                            'Access-Control-Allow-Credentials': 'true'
         });
         res.write(result);
         res.end();
