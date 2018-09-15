@@ -63,8 +63,9 @@ class Operation extends React.Component {
                 <label>
                     <input 
                         type="checkbox" 
-                        id="local_or_remote" 
-                        
+                        id="local_or_remote"
+                        checked={this.state.serverCalculation}
+                        onChange={this.handleServerCheck}
                     />
                     Calculate using server
                 </label>
@@ -89,7 +90,7 @@ class Result extends React.Component {
     render () {
         return (
             <div>
-                <input type="submit" id="resultButton" value="Result :" onClick={calculate}/>
+                <input type="button" id="resultButton" value="Result :" onClick={calculate}/>
                 <p id="result" onChange={this.handleResultChange}>
                     {this.state.result}
                 </p>
