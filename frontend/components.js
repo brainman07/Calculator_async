@@ -106,7 +106,7 @@ class CalculatorBox extends React.Component {
 
     render () {
         return (
-            <form onSubmit={() => {return false}} method="get">
+            <form id="calcForm" onSubmit={() => {return false}} method="get">
                 <Operation />
                 <Result />
             </form>
@@ -114,7 +114,45 @@ class CalculatorBox extends React.Component {
     }
 }
 
+class History extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render () {
+        return (
+            <table id="historyTable">
+                <tbody>
+                    <tr>
+                        <th>History</th>
+                        <th>Operation</th>
+                        <th>1st number</th>
+                        <th>2nd number</th>
+                        <th>Result</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </tbody>
+            </table>
+        );
+    }
+}
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render () {
+        return (
+            <div>
+                <CalculatorBox />
+                <History />
+            </div>
+        );
+    }
+}
+
 ReactDOM.render(
-    <CalculatorBox />,
-    document.getElementById('calcForm')
+    <App />,
+    document.getElementById('container')
 );

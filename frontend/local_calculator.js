@@ -1,5 +1,6 @@
 class LocalCalculator {
     calculate (values, operation) {
+        var result;
         switch (operation) {
             case "Addition":
                 result = (values.nr1) + (values.nr2);

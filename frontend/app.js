@@ -31,10 +31,8 @@ async function calculate() {
 
     const currentLocation = window.location.hostname;
     var response = await fetch(`http://${currentLocation}:8080/server_calculator.js?message="getHistory"`);
-    //console.log(response.text());
-    //console.log(await response.text());
     const history = JSON.parse(await response.text());
-    console.log(history);
+    //console.log(history);
     
     $('#historyTable td').remove();
     for (var entryNumber in history) {
