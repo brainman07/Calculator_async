@@ -1,2 +1,3 @@
 /node_modules/*
 backend/history.json
+frontend/app.js
