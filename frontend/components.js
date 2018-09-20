@@ -144,11 +144,7 @@ class CalculatorBox extends React.Component {
         const result = await calculator.calculate(values, operation);
         this.setState({result: result});
     
-        const currentLocation = window.location.hostname;
-        var response = await fetch(`http://${currentLocation}:8080/server_calculator.js?message="getHistory"`);
-        const history = JSON.parse(await response.text());
-        
-        this.props.onHistoryChange(history);
+        this.props.onHistoryChange();
     }
 
     handleFirstNumberChange(firstNumber) {
@@ -237,7 +233,11 @@ class App extends React.Component {
         this.handleHistoryChange = this.handleHistoryChange.bind(this);
     }
 
-    handleHistoryChange(history) {
+    async handleHistoryChange() {
+        const currentLocation = window.location.hostname;
+        var response = await fetch(`http://${currentLocation}:8080/server_calculator.js?message="getHistory"`);
+        const history = JSON.parse(await response.text());
+
         this.setState({history: history})
     }
 
