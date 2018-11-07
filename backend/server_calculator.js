@@ -54,4 +54,13 @@ http.createServer(async (req, res) => {
         res.end();
     }
 
+    if (req.method == 'GET' && (req.url.indexOf("delHistory") != -1)){
+        await fileStorage.delHistory();
+
+        res.writeHead(200, {'Content-Type': 'text/plain',
+                            'Access-Control-Allow-Origin': '*'});
+        res.write("History deleted.");
+        res.end();
+    }
+
 }).listen(8080);

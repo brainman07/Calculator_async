@@ -1,14 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
 #calcForm {
     float: left;
-    width: 250px;
-    border: 1px solid black;
-    border-width: 1px;
+    width: 260px;
+    border: 2px solid SlateBlue;
+    border-radius: 5px;
     padding: 0px 10px 5px 10px;
 }
 
 #historyTable {
     /* float: right;
     width: calc(100%-300px); */
+    border: 2px solid SlateBlue;
+    border-radius: 5px;
     border-collapse: collapse;
     margin: 0px 0px 0px 10px;
     display:inline-block;
@@ -16,21 +22,29 @@
 
 #historyTable td, #historyTable th {
     border: 1px solid #ddd;
+}
+
+#historyTable th {
+    padding: 10px;
+    background-color: #FFFF99;
+}
+
+#historyTable td {
     padding: 5px;
+}
+
+#historyTable td.center {
+    text-align: center;
 }
 
 #historyTable tr:hover {
     background-color: #ddd;
 }
 
-#historyTable th {
-    padding: 10px;
-    background-color: aquamarine;
-}
-
 #resultButton {
     display:inline-block;
     margin-right:10px;
+    cursor: pointer;
 } 
 
 #result {

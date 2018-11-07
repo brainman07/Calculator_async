@@ -22,4 +22,8 @@ module.exports = class FileHistoryStorage {
         const data = JSON.parse(await fs.readFile(this.filePath));
         return data;
     }
+
+    async delHistory(){
+        await fs.writeFile(this.filePath, '[]');
+    }
 }

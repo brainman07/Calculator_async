@@ -118,6 +118,7 @@ class CalculatorBox extends React.Component {
         this.handleOperationChange = this.handleOperationChange.bind(this);
         this.handleServerCheck = this.handleServerCheck.bind(this);
         this.handleResultClick = this.handleResultClick.bind(this);
+        this.handleDeleteClick = this.handleDeleteClick.bind(this);
     }
 
     getNumbers() {
@@ -131,15 +132,15 @@ class CalculatorBox extends React.Component {
     }
     
     getCalculator() {
-        if (serverCalculation)
+        if (this.state.serverCalculation)
             return new ServerCalculator();
         else return new LocalCalculator();
     }
     
     async handleResultClick() {
-        var values = getNumbers();
+        var values = this.getNumbers();
         var operation = this.state.operation;
-        var calculator = getCalculator();
+        var calculator = this.getCalculator();
     
         const result = await calculator.calculate(values, operation);
         this.setState({result: result});
@@ -163,6 +164,10 @@ class CalculatorBox extends React.Component {
         this.setState({serverCalculation: !this.state.serverCalculation});
     }
 
+    handleDeleteClick() {
+        this.props.onDeleteClick();
+    }
+
     render () {
         return (
             <form id="calcForm" onSubmit={() => {return false}} method="get">
@@ -181,6 +186,12 @@ class CalculatorBox extends React.Component {
                     result={this.state.result}
                     onResultClick={this.handleResultClick}
                 />
+                <input 
+                    type="button" 
+                    id="delButton" 
+                    value="Delete history"
+                    onClick={this.handleDeleteClick}
+                />
             </form>
         );
     }
@@ -191,17 +202,22 @@ class History extends React.Component {
         super(props);
     }
 
+    componentDidMount(){
+        this.props.getHistory();
+    }
+
     render () {
         var rows = [];
         this.props.history.forEach((entry, index) => {
+            const timestamp = entry.timestamp.slice(0, 10) +" "+ entry.timestamp.slice(11, 19);
             rows.push(
                 <tr key={entry.timestamp}>
-                    <td>{index+1}</td>
+                    <td className="center">{index+1}</td>
                     <td>{entry.operation}</td>
-                    <td>{entry.number1}</td>
-                    <td>{entry.number2}</td>
-                    <td>{entry.result}</td>
-                    <td>{entry.timestamp}</td>
+                    <td className="center">{entry.number1}</td>
+                    <td className="center">{entry.number2}</td>
+                    <td className="center">{entry.result}</td>
+                    <td>{timestamp}</td>
                 </tr>
             );
         });
@@ -231,6 +247,7 @@ class App extends React.Component {
             history: []
         };
         this.handleHistoryChange = this.handleHistoryChange.bind(this);
+        this.handleDeleteHistory = this.handleDeleteHistory.bind(this);
     }
 
     async handleHistoryChange() {
@@ -238,14 +255,27 @@ class App extends React.Component {
         var response = await fetch(`http://${currentLocation}:8080/server_calculator.js?message="getHistory"`);
         const history = JSON.parse(await response.text());
 
-        this.setState({history: history})
+        this.setState({history: history});
+    }
+
+    async handleDeleteHistory() {
+        const currentLocation = window.location.hostname;
+        await fetch(`http://${currentLocation}:8080/server_calculator.js?message="delHistory"`);
+        
+        this.setState({history: []});
     }
 
     render () {
         return (
             <div>
-                <CalculatorBox onHistoryChange={this.handleHistoryChange}/>
-                <History history={this.state.history}/>
+                <CalculatorBox 
+                    onHistoryChange={this.handleHistoryChange}
+                    onDeleteClick={this.handleDeleteHistory}    
+                />
+                <History 
+                    history={this.state.history}
+                    getHistory={this.handleHistoryChange}
+                />
             </div>
         );
     }
