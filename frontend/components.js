@@ -267,7 +267,10 @@ class App extends React.Component {
 
     render () {
         return (
-            <div>
+            <div class="flex-container">
+                <div class="header">
+                    <h1>Online calculator</h1>
+                </div>
                 <CalculatorBox 
                     onHistoryChange={this.handleHistoryChange}
                     onDeleteClick={this.handleDeleteHistory}    
