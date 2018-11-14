@@ -7,4 +7,4 @@
 - when the frontend receives a result, a getHistory request is also made
 - the server sends back the history, and React is updating the page.
 
-![alt text](https://imgur.com/lzcgupC)
+![new css - copy](https://user-images.githubusercontent.com/45050079/48517062-cccf0a00-e86d-11e8-82c5-16e7f5dc6b3c.png)
