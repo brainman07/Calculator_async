@@ -6,3 +6,5 @@
 - the server also writes all operations in an SQL database (or a JSON file), and sends back/ or deletes the history when requested
 - when the frontend receives a result, a getHistory request is also made
 - the server sends back the history, and React is updating the page.
+
+![alt text](https://imgur.com/lzcgupC)
