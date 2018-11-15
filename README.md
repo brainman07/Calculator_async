@@ -1,5 +1,5 @@
 # Basic online calculator
-- all frontend files are served to the browser by IIS Manager from windows
+- all frontend files are served to the browser by IIS, from windows
 - the frontend (made with React) communicates with the backend (made with Node.js) through fetch requests
 - the operation can either be calculated locally, or
 - if a checkbox is true, two numbers and an operation string are sent to the server, which sends back the result as response
