@@ -78,7 +78,7 @@ input#resultButton:active, input#delButton:active {
     padding: 5px;
 }
 
-#historyTable td.center {
+#historyTable td.centered {
     text-align: center;
 }
 

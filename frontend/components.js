@@ -212,11 +212,11 @@ class History extends React.Component {
             const timestamp = entry.timestamp.slice(0, 10) +" "+ entry.timestamp.slice(11, 19);
             rows.push(
                 <tr key={entry.timestamp}>
-                    <td className="center">{index+1}</td>
+                    <td className="centered">{index+1}</td>
                     <td>{entry.operation}</td>
-                    <td className="center">{entry.number1}</td>
-                    <td className="center">{entry.number2}</td>
-                    <td className="center">{entry.result}</td>
+                    <td className="centered">{entry.number1}</td>
+                    <td className="centered">{entry.number2}</td>
+                    <td className="centered">{entry.result}</td>
                     <td>{timestamp}</td>
                 </tr>
             );
@@ -267,8 +267,8 @@ class App extends React.Component {
 
     render () {
         return (
-            <div class="flex-container">
-                <div class="header">
+            <div className="flex-container">
+                <div className="header">
                     <h1>Online calculator</h1>
                 </div>
                 <CalculatorBox 
